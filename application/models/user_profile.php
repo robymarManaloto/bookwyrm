@@ -18,4 +18,5 @@ class User_profile extends CI_Model {
         $this->db->update('users', $photo);
     }
 
+
 }

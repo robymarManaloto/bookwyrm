@@ -1,4 +1,4 @@
-<title>BookWyrm - Home</title>
+<title>BookWyrm - Manage Books</title>
 <div class="theme-layout">
 	<div class="responsive-header">
 		<div class="mh-head first Sticky">
@@ -23,49 +23,14 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
-							
-							<?php include 'layout/left_side.php';?>
+						<?php include 'layout/left_side.php';?>
 							<!-- sidebar -->
-							<div class="col-lg-6">
+							<div class="col-lg-8">
 								<div class="central-meta">
-									<div class="new-postbox">
-										<figure>
-											<img src="<?php echo $image_src; ?>" alt="">
-										</figure>
-										<div class="newpst-input">
-											<?php echo form_open_multipart('post/create_post'); ?>
-												<textarea rows="2" name="post_description" placeholder="Write something.."></textarea>
-												<div class="attachments">
-													<ul>			
-														<li>
-															<i class="fa fa-image"></i>
-															<label class="fileContainer">
-																<input name="userfile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.epub,.txt" required>
-															</label>
-														</li>
-														<li>
-													      <select class="form-control" name="categories" required>
-													      	<option value="Uncategorized">
-													      		Select a Category...
-													      	</option> 
-													      	<?php foreach ($categories as $category): ?>
-													      	<option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option> 
-													      	<?php endforeach; ?>
-													      </select>
-														</li>
-														<li>
-															<button type="submit">Post</button>
-														</li>
-													</ul>
-												</div>
-												
-											<?php echo form_close(); ?>
-										</div>
-									</div>
-								</div><!-- add post new box -->
+									  <div class="container mt-5">
+
 								<?php foreach ($posts as $post): ?>
 								<div class="central-meta item">
-									
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
@@ -179,8 +144,16 @@
 								</div>
 								<?php endforeach; ?>
 
-							</div><!-- centerl meta -->
-								<?php include 'layout/right_side.php';?>
+							      	</div>
+							    </div>
+								
+
+								
+
+							</div>
+
+
+						
 							<!-- sidebar -->
 						</div>	
 					</div>

@@ -28,8 +28,16 @@ class Home extends CI_Controller {
 
 		$this->load->view('layout/header');
 		$this->load->model('User_model');
+
+        $data['posts'] = $this->User_model->get_posts();
+        $data['comments'] = $this->User_model->get_comments();
+
+        //GLOBAL
+        $data['current_function'] = __FUNCTION__;
         $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
         $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
         $this->load->view('home', $data);
         $this->load->view('layout/footer');
 	}
@@ -42,10 +50,16 @@ class Home extends CI_Controller {
 		}
 
 		$this->load->view('layout/header');
+
 		$this->load->model('User_model');
-        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
-        $data['current_function'] = __FUNCTION__;
-         $data['categories'] = $this->User_model->get_categories();
+
+
+      	//GLOBAL
+      	$data['current_function'] = __FUNCTION__;
+      	$data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
+        $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
         $this->load->view('edit-profile', $data);
         $this->load->view('layout/footer');
 	}
@@ -60,10 +74,63 @@ class Home extends CI_Controller {
 
 		$this->load->view('layout/header');
 		$this->load->model('User_model');
-        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
+
+        
+        //GLOBAL
         $data['current_function'] = __FUNCTION__;
+        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
         $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
         $this->load->view('account-settings', $data);
         $this->load->view('layout/footer');
 	}
+
+	public function manage_post()
+	{
+		
+		if($this->session->has_userdata('user_id') == 0){
+			redirect('/');
+		}
+
+		$this->load->view('layout/header');
+		$this->load->model('User_model');
+
+        $data['posts'] = $this->User_model->get_posts();
+        $data['comments'] = $this->User_model->get_comments();
+
+        //GLOBAL
+        $data['current_function'] = __FUNCTION__;
+        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
+        $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
+        $this->load->view('manage-posts', $data);
+        $this->load->view('layout/footer');
+	}
+
+
+	public function view_credits()
+	{
+		
+		if($this->session->has_userdata('user_id') == 0){
+			redirect('/');
+		}
+
+		$this->load->view('layout/header');
+		$this->load->model('User_model');
+
+        $data['posts'] = $this->User_model->get_posts();
+        $data['comments'] = $this->User_model->get_comments();
+
+        //GLOBAL
+        $data['current_function'] = __FUNCTION__;
+        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
+        $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
+        $this->load->view('view-credits', $data);
+        $this->load->view('layout/footer');
+	}
+
 }

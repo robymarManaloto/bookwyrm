@@ -4,7 +4,7 @@ function active_function($current_function,$class) {
  	If ($current_function == $class){
 		return "active";
 	}
-	return "non";
+	return "";
 }
 
 ?>
@@ -38,7 +38,7 @@ function active_function($current_function,$class) {
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5>Janice Griffith</h5>
+								  <h5><?php echo $user->first_name." ".$user->last_name; ?></h5>
 <!-- 								  <span>Group Admin</span> -->
 								</li>
 								<li>

@@ -21,8 +21,9 @@
 												<!-- Tab panes -->
 												<div class="tab-content">
 												  <div class="tab-pane active fade show " id="link1" >
-													<span><i class="ti-heart"></i>884</span>
-													  <a href="#" title="weekly-likes">35 new likes this week</a>
+													<span><i class="ti-heart"></i>
+													<?php echo $totals[0]->total_likes;?>
+													</span>
 													  <div class="users-thumb-list">
 														<a href="#" title="Anderw" data-toggle="tooltip">
 															<img src="images/resources/userlist-1.jpg" alt="">  
@@ -48,8 +49,9 @@
 													  </div>
 												  </div>
 												  <div class="tab-pane fade" id="link2" >
-													  <span><i class="ti-eye"></i>440</span>
-													  <a href="#" title="weekly-likes">440 new views this week</a>
+													  <span><i class="ti-eye"></i>
+													  <?php echo $totals[0]->total_views;?>
+													</span>
 												  </div>
 												</div>
 											</div>

@@ -54,8 +54,6 @@ class Profile extends CI_Controller {
     	    $this->load->model('User_profile');
     		$username = $this->session->userdata('user_id');
             $this->load->model('User_profile');
-            
-            printf($this->input->post('photo'));
 
             $this->User_profile->update_profile_photo(array(
                 'profile_picture' => file_get_contents($_FILES['photo']['tmp_name'])), $username);
