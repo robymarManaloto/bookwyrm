@@ -70,10 +70,11 @@ class Book extends CI_Controller {
 
     public function addOwned() {
         
-        $this->load->model('User_book');
+        $this->load->model('User_model');
         $username = $this->session->userdata('user_id');
-        $user_id = $this->User_book->get_user_by_username($username)->user_id;
+        $user_id = $this->User_model->get_user_by_username($username)->user_id;
 
+        $this->load->model('User_book');
         $this->User_book->create_borrowers(array('user_id' => $user_id));
 
         $book_id = $this->input->post('book_id');

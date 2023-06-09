@@ -8,19 +8,13 @@ class User_book extends CI_Model {
         return $query->row();
     }
 
-    public function get_user_by_username($username)
-    {
-        $this->db->where('username', $username);
-        return $this->db->get('users')->row();
-    }
-
     public function get_last_book_id() {
         $query = $this->db->select('book_id')->order_by('book_id', 'desc')->limit(1)->get('books');
         return $query->row();
     }
     
-    public function get_last_file_id() {
-        $query = $this->db->select('file_id')->order_by('file_id', 'desc')->limit(1)->get('files');
+    public function get_last_lenders_id() {
+        $query = $this->db->select('lender_id')->order_by('lender_id', 'desc')->limit(1)->get('lenders');
         return $query->row();
     }
 
