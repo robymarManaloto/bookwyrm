@@ -30,8 +30,33 @@
 				<div class="user-setting">
 					<a href="<?php echo base_url(''); ?>home/edit_profile" title=""><i class="ti-pencil-alt"></i>edit profile</a>
 					<a href="<?php echo base_url(''); ?>home/account_settings" title=""><i class="ti-settings"></i>account setting</a>
-					<a href="<?php echo base_url(''); ?>auth/logout"><i class="ti-power-off"></i>log out</a>
+					<a href="<?php echo base_url(''); ?>auth/logout" id="logout-link"><i class="ti-power-off"></i>log out</a>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+<script>
+  // Attach event listener to the logout link
+  document.getElementById('logout-link').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent the default link behavior
+    
+    // Display the confirmation dialog
+    Swal.fire({
+      title: 'Logout Confirmation',
+      text: 'Are you sure you want to log out?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, log out',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // If the user confirms, navigate to the logout URL
+        window.location.href = event.target.href;
+      }
+    });
+  });
+</script>

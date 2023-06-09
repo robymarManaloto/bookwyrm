@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/css/style.css">
     <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/css/color.css">
     <link rel="stylesheet" href="<?php echo base_url(''); ?>assets/css/responsive.css">
+    
+    <!-- Include the Bulma theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
     <style type="text/css">
     .file-preview {
       display: flex;

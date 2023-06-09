@@ -1,4 +1,4 @@
-<title>BookWyrm - Account Settings</title>
+<title>BookWyrm - Your Books</title>
 
 <div class="theme-layout">
 	<div class="responsive-header">
@@ -74,14 +74,5 @@
 			</div>
 		</div>	
 	</section>
-	<div class="bottombar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Angeles University Foundation</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php include 'layout/bottombar.php';?>
 </div>

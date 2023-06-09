@@ -13,7 +13,6 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
-
 </body> 
 
 </html>
@@ -27,6 +26,12 @@
       $('#searchDocumentTable').DataTable();
       $('#ownedBooksTable').DataTable();
       $('#lendBooksTable').DataTable();
+      
     });
   </script>
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+<script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>

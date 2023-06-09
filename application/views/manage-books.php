@@ -148,12 +148,15 @@
 										              <th><?php echo $book->lender_name; ?></th>
 										              <th><?php echo $book->due_date; ?></th>
 										              <th> 
-										              <?php echo form_open('book/removeOwned'); ?>
-										              <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
-										              	<button type="submit" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-</svg></button>
+										              <?php echo form_open('book/removeOwned', 'id="removeOwnedForm"') ?>
+														  <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
+														  <button type="button" class="btn btn-sm btn-danger" onclick="showConfirmation_Owned()">
+														    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+														      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+														    </svg>
+														  </button>
 														<?php echo form_close(); ?>
+
 														<a class="btn btn-sm btn-success" href="<?php echo base_url('blobcontroller/downloadblob/').$book->file_id; ?>" >
 														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
   <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -207,12 +210,14 @@
 </svg></button>
 													  <?php echo form_close(); ?>
 
-													  <?php echo form_open('book/removeLend'); ?>
-										              <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
-										              	<button type="submit" class="btn btn-sm btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-</svg></button>
-														<?php echo form_close(); ?>
+													<?php echo form_open('book/removeLend', 'id="removeLendForm"') ?>
+													  <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
+													  <button type="button" class="btn btn-sm btn-danger" onclick="showConfirmation()">
+													    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+													      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+													    </svg>
+													  </button>
+													<?php echo form_close(); ?>
 										              </th>
 									          		</tr>
 									          	<?php endforeach; ?>
@@ -236,16 +241,7 @@
 			</div>
 		</div>	
 	</section>
-	<div class="bottombar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Angeles University Foundation</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php include 'layout/bottombar.php';?>
 </div>
 
 
@@ -269,5 +265,37 @@
             });
         });
     });
+
+    function showConfirmation() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Submit the form if confirmed
+        document.getElementById('removeLendForm').submit();
+      }
+    });
+  }
+
+  function showConfirmation_Owned() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Submit the form if confirmed
+        document.getElementById('removeOwnedForm').submit();
+      }
+    });
+  }
 
 </script>

@@ -51,14 +51,14 @@
 														  </button>
 														<?= form_close() ?>
 
-														<?= form_open('post/delete_post') ?>
-														<input type="hidden" name="post_id" value="<?php echo $post->post_id; ?>">
-														<button class="btn btn-danger" type="submit" >
-															<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-</svg>
-														  </button>
-														<?= form_close() ?>
+													<?= form_open('post/delete_post', 'id="deleteForm"') ?>
+													  <input type="hidden" name="post_id" value="<?php echo $post->post_id; ?>">
+													  <button class="btn btn-danger" type="button" onclick="showConfirmation()">
+													    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+													      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+													    </svg>
+													  </button>
+													<?= form_close() ?>
 													</div>
 													<em><?php echo $post->likes;?> likes</em>
 												</figure>
@@ -89,17 +89,31 @@
 			</div>
 		</div>	
 	</section>
-	<div class="bottombar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Angeles University Foundation</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
-				</div>
-			</div>
-		</div>
-	</div>
+	<?php include 'layout/bottombar.php';?>
 </div>
 
 <script src="<?php echo base_url(''); ?>assets/js/main.min.js"></script>
 <script src="<?php echo base_url(''); ?>assets/js/script.js"></script>
+
+<script>
+  function showConfirmation() {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This action cannot be undone.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Submit the form if confirmed
+        document.getElementById('deleteForm').submit();
+      }
+    });
+  }
+</script>
+
+
+
+
+
