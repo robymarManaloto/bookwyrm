@@ -1,18 +1,17 @@
 <div class="topbar stick">
-		<a href="<?php echo base_url(''); ?>home/feed">
 		<div class="logo">
 			<img src="<?php echo base_url(''); ?>assets/images/banner.svg" alt="">
 		</div>
-		</a>
+		
 		<div class="top-area">
 			<ul class="setting-area">
 				<li>
 					<a href="#" title="Search" data-ripple=""><i class="ti-search"></i></a>
 					<div class="searched">
-						<?= form_open('home/search', array('class' => 'form-search')) ?>
-							<input type="text" name="search" placeholder="Search Books or Documents">
+						<form method="post" class="form-search">
+							<input type="text" placeholder="Search Books or Documents">
 							<button data-ripple><i class="ti-search"></i></button>
-						<?= form_close() ?>
+						</form>
 					</div>
 				</li>
 			</ul>
@@ -23,7 +22,7 @@
 		    $cover_data = base64_encode($user->background_picture);
 		    $cover_src = 'data:image/jpg;base64,'.$cover_data;
 			?>
-			
+
 			<div class="user-img">
 				<img src="<?php echo $image_src; ?>" style="height:3em;" alt="">
 				<span class="status f-online"></span>

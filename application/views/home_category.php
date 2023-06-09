@@ -1,4 +1,4 @@
-<title>BookWyrm - Manage Books</title>
+<title>BookWyrm - Home</title>
 <div class="theme-layout">
 	<div class="responsive-header">
 		<div class="mh-head first Sticky">
@@ -23,28 +23,66 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row" id="page-contents">
-						<?php include 'layout/left_side.php';?>
+							
+							<?php include 'layout/left_side.php';?>
 							<!-- sidebar -->
-							<div class="col-lg-8">
+							<div class="col-lg-6">
 								<div class="central-meta">
-									  <div class="container mt-5">
-
+									<div class="new-postbox">
+										<figure>
+											<img src="<?php echo $image_src; ?>" alt="">
+										</figure>
+										<div class="newpst-input">
+											<?php echo form_open_multipart('post/create_post'); ?>
+												<textarea rows="2" name="post_description" placeholder="Write something.."></textarea>
+												<div class="attachments">
+													<ul>			
+														<li>
+															<i class="fa fa-image"></i>
+															<label class="fileContainer">
+																<input name="userfile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.epub,.txt" required>
+															</label>
+														</li>
+														<li>
+													      <select class="form-control" name="categories" required>
+													      	<option value="1">
+													      		Select a Category...
+													      	</option> 
+													      	<?php foreach ($categories as $category): ?>
+													      	<option value="<?php echo $category->category_id; ?>"><?php echo $category->category_name; ?></option> 
+													      	<?php endforeach; ?>
+													      </select>
+														</li>
+														<li>
+															<button type="submit">Post</button>
+														</li>
+													</ul>
+												</div>
+												
+											<?php echo form_close(); ?>
+										</div>
+									</div>
+								</div><!-- add post new box -->
 								<?php foreach ($posts as $post): ?>
+									<?php if ($post->category_id == $category_id): ?>
 								<div class="central-meta item">
+									
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
 												<?php
-												$profile_data = base64_encode($post->profile_picture);
-											    $profile_src = 'data:image/jpg;base64,'.$image_data;
+												$post_data = base64_encode($post->profile_picture);
+											    $post_src = 'data:image/jpg;base64,'.$post_data;
 												?>
-												<img src="<?php echo $profile_src; ?>" alt="">
+												<img src="<?php echo $post_src; ?>" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="time-line.html" title="">
+												<ins>
+													<a href="<?php echo base_url(''); ?>profile/view?user_id=<?php echo urlencode($post->user_id); ?>" title="">
 													<?php echo $post->name; ?>
-												</a></ins>
-												<span>published: <?php echo $post->date; ?></span>
+													</a>
+												</ins>
+												<span>published: <?php echo $post->date; ?> | category: <?php echo $post->category_name; ?></span>
 											</div>
 											<div class="post-meta">
 												<a href="<?php echo base_url('blobcontroller/downloadblob/').$post->file_id; ?>" >
@@ -112,7 +150,8 @@
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
-															<h5><a href="time-line.html" title=""><?php echo $comment->name;?></a></h5>
+															<h5><a href="<?php echo base_url(''); ?>profile/view/?user_id=<?php echo urlencode($comment->user_id); ?>" title="">
+													<?php echo $comment->name; ?></a></h5>
 															<span><?php echo $comment->relative_time;?></span>
 														</div>
 														<p><?php echo $comment->comment_text;?>
@@ -142,18 +181,11 @@
 									</div>
 									
 								</div>
+									<?php endif; ?>
 								<?php endforeach; ?>
 
-							      	</div>
-							    </div>
-								
-
-								
-
-							</div>
-
-
-						
+							</div><!-- centerl meta -->
+								<?php include 'layout/right_side.php';?>
 							<!-- sidebar -->
 						</div>	
 					</div>

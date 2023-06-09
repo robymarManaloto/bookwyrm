@@ -44,9 +44,6 @@ function active_function($current_function,$class) {
 								<li>
 									<a class="<?php echo active_function($current_function,"view_books"); ?>" href="<?php echo base_url(''); ?>home/view_books" title="" data-ripple="">Books</a>
 									<a class="<?php echo active_function($current_function,"view_documents"); ?>" href="<?php echo base_url(''); ?>home/view_documents" title="" data-ripple="">Documents</a>
-									<a class="<?php echo active_function($current_function,"edit_profile"); ?>" href="<?php echo base_url(''); ?>home/edit_profile" title="">Profile</a>
-									<a class="<?php echo active_function($current_function,"account_settings"); ?>" href="<?php echo base_url(''); ?>home/account_settings" title="" data-ripple="">Account Settings
-									</a>
 								</li>
 							</ul>
 						</div>

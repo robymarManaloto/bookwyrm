@@ -95,4 +95,41 @@ class Post extends CI_Controller {
             redirect('/home/manage_post', 'refresh');
      }
 
+    public function edit_post()
+    {
+        
+        if($this->session->has_userdata('user_id') == 0){
+            redirect('/');
+        }
+
+        $this->load->view('layout/header');
+
+        $username = $this->session->userdata('user_id');
+        $this->load->model('User_model');
+        $user_id = $this->User_model->get_user_by_username($username)->user_id;
+
+        $data['books'] = $this->User_model->get_books_id($user_id);
+
+        //GLOBAL
+        $data['current_function'] = __FUNCTION__;
+        $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
+        $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+        $data['edit_data'] = $this->User_model->get_edit_post_data($user_id);
+        $this->load->view('edit-post', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function updatePost() {
+        $post_id = $this->input->post('post_id');
+        $this->load->model('User_post');
+        $data = array(
+            'post_description' => $this->input->post('post_description'),
+            'category_id' => $this->input->post('categories')
+        );
+        $this->User_post->updatePost($data, $post_id);
+        
+        redirect('/home/manage_post', 'refresh');
+    }
+
 }

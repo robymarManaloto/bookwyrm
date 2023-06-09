@@ -29,7 +29,7 @@ class Book extends CI_Controller {
         $data['current_function'] = __FUNCTION__;
         $data['categories'] = $this->User_model->get_categories();
         $data['avail_books'] = $this->User_model->get_avail_books();
-        $data['books_owned'] = $this->User_model->get_books_owned();
+        $data['books_owned'] = $this->User_model->get_books_owned($user_id);
         $data['books_len'] = $this->User_model->get_books_len($user_id);
 
         $this->load->view('manage-books', $data);

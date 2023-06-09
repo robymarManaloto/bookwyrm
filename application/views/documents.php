@@ -1,4 +1,4 @@
-<title>BookWyrm - Account Settings</title>
+<title>BookWyrm - Documents</title>
 
 <div class="theme-layout">
 	<div class="responsive-header">
@@ -34,38 +34,36 @@
 							<!-- sidebar -->
 								<div class="col-lg-6">
 									<div class="central-meta">
-										<div class="editing-info">
-											<h5 class="f-title"><i class="ti-lock"></i>Change Password</h5>
+									<div class="groups">
+										<span><i class="fa fa-file-text-o"></i> Your Documents</span>
+									</div>
+									<ul class="liked-pages">
+										<?php foreach ($posts as $post): ?>
+										<li>
+											<a href="<?php echo base_url('blobcontroller/downloadblob/').$post->file_id; ?>" >
 
-										    <?php 
-										    	echo '<div style="color: red;"><small>'.validation_errors().'</small></div><br>';
-
-										    	if (isset($error_message)) {
-										        echo '<div style="color: red;"><small>' . $error_message . '</small></div><br>';
-										   		 } ?>
-
-										    <?php echo form_open('auth/update_password'); ?>
-												<div class="form-group">	
-												  <input name="old_password" type="password" required="required"/>
-												  <label class="control-label" for="input">Current password</label><i class="mtrl-select"></i>
-												</div>
-												<div class="form-group">	
-												  <input name="new_password" type="password" id="input" required="required"/>
-												  <label class="control-label" for="input">New password</label><i class="mtrl-select"></i>
-												</div>
-												<div class="form-group">	
-												  <input type="password" name="confirm_password" required="required"/>
-												  <label  class="control-label" for="input">Confirm password</label><i class="mtrl-select"></i>
+											<div class="f-page">
+												
+												<figure>
+														<br>
+														<center>
+														<svg xmlns="http://www.w3.org/2000/svg" height="6em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/></svg>
+														</center>
+													<em><?php echo $post->likes;?> likes</em>
+												</figure>
+												<div class="page-infos">
+													<h5><?php echo $post->post_description;?></h5>
+													<span><?php echo $post->date;?></span>
 												</div>
 												
-												<div class="submit-btns">
-													<a href="<?php echo base_url(); ?>/home/feed">
-												<button type="button" class="mtr-btn"><span>Cancel</span></button></a>
-													<button type="submit" class="mtr-btn"><span>Update</span></button>
-												</div>
-											<?php echo form_close(); ?>
-										</div>
-									</div>	
+											</div>
+											</a>
+										</li>
+										<?php endforeach; ?>
+										
+									</ul>
+									
+								</div>	
 								</div>
 
 

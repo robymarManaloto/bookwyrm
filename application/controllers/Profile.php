@@ -73,4 +73,38 @@ class Profile extends CI_Controller {
             redirect('/home/edit_profile', 'refresh');
     }
 
+    public function view()
+    {
+        
+        
+        if($this->session->has_userdata('user_id') == 0){
+            redirect('/');
+        }
+
+        $this->load->view('layout/header');
+
+        $this->load->model('User_model');
+
+        $username = $this->session->userdata('user_id');
+        $this->load->model('User_model');
+        $user_id = $this->input->get('user_id');
+
+        $data['posts'] = $this->User_model->get_posts_id($user_id);
+        $data['books'] = $this->User_model->get_books_id($user_id);
+        
+        //GLOBAL
+        $data['current_function'] = __FUNCTION__;
+        $data['user'] = $this->User_model->get_user_by_id($user_id);
+
+        $data['categories'] = $this->User_model->get_categories();
+        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+        $data['totals_books'] = $this->User_model->totals_books($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
+
+        $this->load->view('view-profile', $data);
+        $this->load->view('layout/footer');
+    }
+
+
+
+
 }

@@ -70,4 +70,9 @@ class User_post extends CI_Model {
         $this->db->delete('files');
     }
 
+    public function updatePost($data, $post_id) {
+        $this->db->where('post_id', $post_id);
+        $this->db->update('posts', $data);
+    }
+
 }

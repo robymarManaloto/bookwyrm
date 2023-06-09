@@ -23,6 +23,8 @@
     // Initialize DataTables
     $(document).ready(function() {
       $('#availableBooksTable').DataTable();
+      $('#searchBookTable').DataTable();
+      $('#searchDocumentTable').DataTable();
       $('#ownedBooksTable').DataTable();
       $('#lendBooksTable').DataTable();
     });

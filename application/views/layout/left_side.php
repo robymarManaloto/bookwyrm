@@ -39,7 +39,8 @@ function active_function_left($current_function,$class) {
 											<?php foreach ($categories as $category): ?>
 											<li>
 												<div class="activity-meta">
-													<span><a href="#" title=""><?php echo $category->category_name; ?></a></span>
+													<span><a href="<?php echo base_url(''); ?>home/category/?category_id=<?php echo urlencode($category->category_id); ?>
+														" title=""><?php echo $category->category_name; ?></a></span>
 												</div>
 											</li>
 											<?php endforeach; ?>

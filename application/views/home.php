@@ -70,15 +70,17 @@
 										<div class="friend-info">
 											<figure>
 												<?php
-												$profile_data = base64_encode($post->profile_picture);
-											    $profile_src = 'data:image/jpg;base64,'.$image_data;
+												$post_data = base64_encode($post->profile_picture);
+											    $post_src = 'data:image/jpg;base64,'.$post_data;
 												?>
-												<img src="<?php echo $profile_src; ?>" alt="">
+												<img src="<?php echo $post_src; ?>" alt="">
 											</figure>
 											<div class="friend-name">
-												<ins><a href="time-line.html" title="">
+												<ins>
+													<a href="<?php echo base_url(''); ?>profile/view?user_id=<?php echo urlencode($post->user_id); ?>" title="">
 													<?php echo $post->name; ?>
-												</a></ins>
+													</a>
+												</ins>
 												<span>published: <?php echo $post->date; ?> | category: <?php echo $post->category_name; ?></span>
 											</div>
 											<div class="post-meta">
@@ -147,7 +149,8 @@
 													</div>
 													<div class="we-comment">
 														<div class="coment-head">
-															<h5><a href="time-line.html" title=""><?php echo $comment->name;?></a></h5>
+															<h5><a href="<?php echo base_url(''); ?>profile/view/?user_id=<?php echo urlencode($comment->user_id); ?>" title="">
+													<?php echo $comment->name; ?></a></h5>
 															<span><?php echo $comment->relative_time;?></span>
 														</div>
 														<p><?php echo $comment->comment_text;?>
