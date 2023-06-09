@@ -3780,6 +3780,166 @@ a.add-butn.more-action {
     font-weight: 400;
 }
 
+/*--- your biopage ---*/
+
+.your-bio > figure {
+    display: inline-block;
+    margin-bottom: 0;
+    max-width: 55px;
+    vertical-align: middle;
+    width: 55px;
+}
+
+.page-meta {
+    display: inline-block;
+    padding-left: 10px;
+    vertical-align: middle;
+    width: 69.8%;
+}
+
+.your-bio {
+    display: inline-block;
+    padding: 0 20px 10px;
+    width: 100%;
+}
+
+.page-meta > a {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: capitalize;
+    width: auto;
+}
+
+.page-meta > span {
+    display: inline-block;
+    font-size: 13px;
+    width: 100%;
+}
+
+.page-meta > span i {
+    margin-right: 5px;
+    vertical-align: sub;
+}
+
+.page-meta > span em {
+    border: 1px solid #cecece;
+    display: inline-block;
+    line-height: 8px;
+    margin-left: 3px;
+    padding: 3px;
+}
+
+.mt-2,
+.my-2 {
+    margin-top: 0;
+    border: 1px solid #efefef;
+}
+
+.d-flex .tab-content {
+    background: #f7f7f7 none repeat scroll 0 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.basics,
+.education {
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.education {
+    list-style: none;
+}
+
+.basics > li,
+.education > li {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+}
+
+.basics > li i,
+.education > li i {
+    margin-right: 30px;
+}
+
+.location-map #map-canvas {
+    height: 290px;
+}
+
+#work > div {
+    color: #909090;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+#work > div a {
+    margin-bottom: 5px;
+}
+
+.personal > p {
+    color: #7c7c7c;
+    font-size: 14px;
+}
+
+.about .personal {
+    display: inline-block;
+    width: 100%;
+}
+
+#work > p a {
+    display: inline-block;
+    text-decoration: underline;
+}
+
+#work > p img {
+    margin-right: 10px;
+}
+
+#work {
+    padding: 20px;
+}
+
+.f-title {
+    font-size: 17.5px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: #000;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.f-title::before {
+    bottom: 8px;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.f-title.ext-margin {
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.f-title i {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.groups > span i {
+    margin-right: 5px;
+}
+
+.groups > span {
+    font-size: 20px;
+    font-weight: 400;
+}
 
 /*--- edit basic info page ---*/
 
