@@ -96,16 +96,58 @@ class Book extends CI_Controller {
     }
 
     public function removeOwned() {
-        $this->load->model('User_model');
-        $username = $this->session->userdata('user_id');
-        $user_id = $this->User_model->get_user_by_username($username)->user_id;
-
-        $book_id = $this->input->post('book_id');
+        $transaction_id = $this->input->post('transaction_id');
         $this->load->model('User_book');
-        $this->User_book->removeOwnBook($book_id, $user_id);
+        $this->User_book->removeOwnBook($transaction_id);
 
         redirect('/book', 'refresh');
     }
 
+    public function removeLend() {
+        $transaction_id = $this->input->post('transaction_id');
+        $this->load->model('User_book');
+        $this->User_book->removeLender($transaction_id);
+        
+        redirect('/book', 'refresh');
+    }
+
+    public function editLend() {
+        if($this->session->has_userdata('user_id') == 0){
+            redirect('/');
+        }
+
+        $username = $this->session->userdata('user_id');
+        $this->load->model('User_model');
+        $user_id = $this->User_model->get_user_by_username($username)->user_id;
+
+        $this->load->view('layout/header');
+        $this->load->model('User_model');
+        //GLOBAL
+        $book_id = $this->input->post('book_id');
+
+        $data['current_function'] = __FUNCTION__;
+        $data['categories'] = $this->User_model->get_categories();
+        $data['avail_books'] = $this->User_model->get_avail_books();
+        $data['books_owned'] = $this->User_model->get_books_owned();
+        $data['books_len'] = $this->User_model->get_books_len($user_id);
+        $data['edit_data'] = $this->User_model->get_edit_data($book_id);
+        $this->load->view('edit-books', $data);
+        $this->load->view('layout/footer');
+    }
+
+    public function updateBook() {
+        $book_id = $this->input->post('book_id');
+        $this->load->model('User_book');
+        $data = array(
+            'title' => $this->input->post('title'),
+            'author' => $this->input->post('author'),
+            'description' => $this->input->post('description'),
+            'publication_date' => $this->input->post('publication_date'),
+            'isbn' => $this->input->post('isbn')
+        );
+        $this->User_book->updateBook($data, $book_id);
+        
+        redirect('/book', 'refresh');
+    }
 
 }

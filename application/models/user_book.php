@@ -43,6 +43,69 @@ class User_book extends CI_Model {
         $this->db->insert('lenders', $data);
     }
 
+    public function removeLender($transaction_id) {        
+        $this->db->select('lender_id, book_id');
+        $this->db->where('transaction_id', $transaction_id);
+        $query = $this->db->get('booktransactions');
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $book_id = $row->book_id;
+            $lender_id = $row->lender_id;
 
-  
+            $this->db->select('file_id');
+            $this->db->where('book_id', $book_id);
+            $query = $this->db->get('books');
+            if ($query->num_rows() > 0) {
+                $row = $query->row();
+                $file_id = $row->file_id;
+
+                $query = $this->db->query('
+                    SELECT borrower_id
+                    FROM booktransactions
+                    WHERE borrower_id IS NOT NULL AND book_id = ' . $this->db->escape($book_id) . ';
+                ');
+                $rows = $query->result();
+
+                $this->db->where('book_id', $book_id);
+                $this->db->delete('booktransactions');
+
+                $this->db->where('book_id', $book_id);
+                $this->db->delete('books');
+
+                foreach ($rows as $row) {
+                    $this->db->where('borrower_id', $row->borrower_id);
+                    $this->db->delete('borrowers');
+                }
+
+                $this->db->where('lender_id', $lender_id);
+                $this->db->delete('lenders');
+
+                $this->db->where('file_id', $file_id);
+                $this->db->delete('files');
+            }
+        }
+    }
+
+    public function removeOwnBook($transaction_id) {        
+        $this->db->select('borrower_id');
+        $this->db->where('transaction_id', $transaction_id);
+        $query = $this->db->get('booktransactions');
+        
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $borrower_id = $row->borrower_id;
+        }
+
+        $this->db->where('transaction_id', $transaction_id);
+        $this->db->delete('booktransactions');
+
+        $this->db->where('borrower_id', $borrower_id);
+        $this->db->delete('borrowers');
+    }
+
+    public function updateBook($data, $book_id) {
+        $this->db->where('book_id', $book_id);
+        $this->db->update('books', $data);
+    }
+
 }

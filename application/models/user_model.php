@@ -34,12 +34,23 @@ class User_model extends CI_Model {
        return $query->result();
     }
 
+    public function get_edit_data($book_id)
+    {
+       $query = $this->db->query('
+                SELECT * FROM books WHERE book_id = ' . $this->db->escape($book_id) . ' LIMIT 1;
+        ');
+       return $query->result();
+    }
+
     public function get_books_owned()
     {
         $query = $this->db->query('
                 SELECT 
                     b.*,
-                    CONCAT(u.first_name," ",u.last_name) AS lender_name
+                    CONCAT(u.first_name," ",u.last_name) AS lender_name,
+                    br.borrower_id,
+                    bt.transaction_id,
+                    bt.due_date
                 FROM books b
                 JOIN booktransactions bt ON b.book_id = bt.book_id
                 JOIN borrowers br ON br.borrower_id = bt.borrower_id
@@ -53,7 +64,9 @@ class User_model extends CI_Model {
         $query = $this->db->query('
                 SELECT 
                     b.*,
-                    CONCAT(u.first_name," ",u.last_name) AS lender_name
+                    CONCAT(u.first_name," ",u.last_name) AS lender_name,
+                    l.lender_id,
+                    bt.transaction_id
                 FROM books b
                 JOIN booktransactions bt ON b.book_id = bt.book_id
                 JOIN lenders l ON l.lender_id = bt.lender_id

@@ -133,6 +133,7 @@
 									              <th>Publication Date</th>
 									              <th>ISBN</th>
 									              <th>Lender</th>
+									              <th>Due Date</th>
 									              <th>Action</th>
 									            </tr>
 									          </thead>
@@ -145,9 +146,10 @@
 										              <th><?php echo $book->publication_date; ?></th>
 										              <th><?php echo $book->isbn; ?></th>
 										              <th><?php echo $book->lender_name; ?></th>
+										              <th><?php echo $book->due_date; ?></th>
 										              <th> 
 										              <?php echo form_open('book/removeOwned'); ?>
-										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+										              <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
 										              	<button type="submit" class="btn btn-sm btn-danger">Remove</button>
 														<?php echo form_close(); ?>
 										              </th>
@@ -194,9 +196,9 @@
 										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
 										              	<button type="submit" class="btn btn-sm btn-primary">Edit</button>
 													  <?php echo form_close(); ?>
-													  
-										              <?php echo form_open('book/removeLend'); ?>
-										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+
+													  <?php echo form_open('book/removeLend'); ?>
+										              <input type="hidden" name="transaction_id" value="<?php echo $book->transaction_id; ?>">
 										              	<button type="submit" class="btn btn-sm btn-danger">Remove</button>
 														<?php echo form_close(); ?>
 										              </th>
