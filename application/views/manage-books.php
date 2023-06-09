@@ -34,34 +34,41 @@
 									        <h2  class="mb-4">Add a new Book</h2>
 									      </div>
 									      <div class="card-body">
-									        <form>
+									      	<?php 
+												echo '<div style="color: red;"><small>'.validation_errors().'</small></div><br>';
+														    	
+												if (isset($error_message)) {
+													echo '<div style="color: red;"><small>' . $error_message . '</small></div><br>';
+												} 
+											?>
+									        <?php echo form_open_multipart('book/addBook'); ?>
 									          <!-- Book details input fields -->
 									          <div class="form-group">
 									            <label for="title">Title</label>
-									            <input type="text" class="form-control" id="title" required>
+									            <input type="text" name="title" class="form-control" id="title" required>
 									          </div>
 									          <div class="form-group">
 									            <label for="author">Author</label>
-									            <input type="text" class="form-control" id="author" required>
+									            <input type="text" name="author" class="form-control" id="author" required>
 									          </div>
 									          <div class="form-group">
 									            <label for="description">Description</label>
-									            <textarea class="form-control" id="description" rows="3"></textarea>
+									            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
 									          </div>
 									          <div class="form-group">
 									            <label for="publication_date">Publication Date</label>
-									            <input type="date" class="form-control" id="publication_date">
+									            <input name="publication_date" type="date" class="form-control" id="publication_date">
 									          </div>
 									          <div class="form-group">
 									            <label for="isbn">ISBN</label>
-									            <input type="text" class="form-control" id="isbn">
+									            <input name="isbn" type="text" class="form-control" id="isbn">
 									          </div>
 									          <div class="form-group">
 									            <label for="file">Upload File</label>
-									            <input type="file" class="form-control-file" id="file" required>
+									            <input name="file" type="file" class="form-control-file" id="file" required>
 									          </div>
 									          <button type="submit" class="btn">Add Book</button>
-									        </form>
+									        <?php echo form_close(); ?>
 									      </div>
 									    </div>
 							      	</div>
@@ -83,19 +90,26 @@
 									              <th>Publication Date</th>
 									              <th>ISBN</th>
 									              <th>Lender</th>
-									              <th>Credits</th>
 									              <th>Action</th>
 									            </tr>
 									          </thead>
 									          <tbody>
-											      <td>To Kill a Mockingbird</td>
-											      <td>Harper Lee</td>
-											      <td>A powerful story addressing racial injustice in the Deep South.</td>
-											      <td>1960-07-11</td>
-											      <td>978-0061120084</td>
-											      <td>Jane Smith</td>
-											      <td>3</td>
-											      <td><button class="btn btn-sm btn-primary">Add</button></td>
+									          	<?php foreach ($avail_books as $book): ?>
+									          		<tr>
+									          		  <th><?php echo $book->title; ?></th>
+										              <th><?php echo $book->author; ?></th>
+										              <th><?php echo $book->description; ?></th>
+										              <th><?php echo $book->publication_date; ?></th>
+										              <th><?php echo $book->isbn; ?></th>
+										              <th><?php echo $book->lender_name; ?></th>
+										              <th> 
+										              <?php echo form_open('book/addOwned'); ?>
+										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+										              	<button type="submit" class="btn btn-sm btn-primary">Add</button>
+														<?php echo form_close(); ?>
+										              </th>
+									          		</tr>
+									          	<?php endforeach; ?>
 									          </tbody>
 									        </table>
 									      </div>
@@ -131,7 +145,7 @@
 											      <td>978-0141439518</td>
 											      <td>Jane Smith</td>
 											      <td>
-											        <button class="btn btn-sm btn-primary">Remove</button>
+											        <button class="btn btn-sm btn-danger">Remove</button>
 											      </td>
 											    </tr>
 									          </tbody>
@@ -157,7 +171,7 @@
 									              <th>Description</th>
 									              <th>Publication Date</th>
 									              <th>ISBN</th>
-									              <th>Monetization</th>
+									              
 									              <th>Action</th>
 									            </tr>
 									          </thead>
@@ -168,9 +182,8 @@
 											      <td>A coming-of-age story following Holden Caulfield.</td>
 											      <td>1951-07-16</td>
 											      <td>978-0316769174</td>
-											      <td>Yes</td>
 											      <td>
-											        <button class="btn btn-sm btn-warning">Monetize</button>
+											        <button class="btn btn-sm btn-primary">Unpublish</button>
 											        <button class="btn btn-sm btn-danger">Remove</button>
 											      </td>
 											    </tr>

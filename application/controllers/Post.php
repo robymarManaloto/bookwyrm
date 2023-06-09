@@ -83,6 +83,16 @@ class Post extends CI_Controller {
         }
     }
 
+     public function delete_post() {
+        $this->load->model('User_post');
+        $this->load->model('User_model');
 
+        $post_id = $this->input->post('post_id');
+
+        $this->User_post->delete_post($post_id);
+
+        // Redirect to a success page or any other page
+            redirect('/home/manage_post', 'refresh');
+     }
 
 }

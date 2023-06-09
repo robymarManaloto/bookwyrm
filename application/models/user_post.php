@@ -39,4 +39,35 @@ class User_post extends CI_Model {
         $this->db->insert('comments', $data);
     }
     
+    public function delete_post($post_id) {
+        $this->delete_comments_by_post($post_id);
+        
+        $this->db->select('file_id');
+        $this->db->where('post_id', $post_id);
+        $query = $this->db->get('posts');
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            $file_id = $row->file_id;
+            
+        }
+
+        $this->db->where('post_id', $post_id);
+        $this->db->delete('posts');
+
+
+        $this->delete_files_post($file_id);
+
+        
+    }
+
+    public function delete_comments_by_post($post_id) {
+        $this->db->where('post_id', $post_id);
+        $this->db->delete('comments');
+    }
+
+    public function delete_files_post($file_id) {
+        $this->db->where('file_id', $file_id);
+        $this->db->delete('files');
+    }
+
 }

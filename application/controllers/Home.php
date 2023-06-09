@@ -96,14 +96,14 @@ class Home extends CI_Controller {
 		$this->load->view('layout/header');
 		$this->load->model('User_model');
 
-        $data['posts'] = $this->User_model->get_posts();
-        $data['comments'] = $this->User_model->get_comments();
+		$user = $this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id;
 
+        $data['posts'] = $this->User_model->get_posts_id($user);
+        
         //GLOBAL
         $data['current_function'] = __FUNCTION__;
         $data['user'] = $this->User_model->get_user_by_username($this->session->userdata('user_id'));
         $data['categories'] = $this->User_model->get_categories();
-        $data['totals'] = $this->User_model->totals($this->User_model->get_user_by_username($this->session->userdata('user_id'))->user_id);
 
         $this->load->view('manage-posts', $data);
         $this->load->view('layout/footer');

@@ -45,7 +45,7 @@
 														</li>
 														<li>
 													      <select class="form-control" name="categories" required>
-													      	<option value="Uncategorized">
+													      	<option value="1">
 													      		Select a Category...
 													      	</option> 
 													      	<?php foreach ($categories as $category): ?>
@@ -79,7 +79,7 @@
 												<ins><a href="time-line.html" title="">
 													<?php echo $post->name; ?>
 												</a></ins>
-												<span>published: <?php echo $post->date; ?></span>
+												<span>published: <?php echo $post->date; ?> | category: <?php echo $post->category_name; ?></span>
 											</div>
 											<div class="post-meta">
 												<a href="<?php echo base_url('blobcontroller/downloadblob/').$post->file_id; ?>" >

@@ -19,7 +19,21 @@ class User_model extends CI_Model {
        $query = $this->db->get('categories');
        return $query->result();
     }
-    
+
+    public function get_avail_books()
+    {
+        $query = $this->db->query('
+                SELECT 
+                    b.*,
+                    CONCAT(u.first_name," ",u.last_name) AS lender_name
+                FROM books b
+                JOIN booktransactions bt ON b.book_id = bt.book_id
+                JOIN lenders l ON l.lender_id = bt.lender_id
+                JOIN users u ON l.user_id = u.user_id
+        ');
+       return $query->result();
+    }
+
     public function get_posts()
     {
        $this->incrementViewsCount();
@@ -41,6 +55,31 @@ class User_model extends CI_Model {
        return $query->result();
     }
     
+    public function get_posts_id($user_id)
+    {
+       $this->incrementViewsCount();
+       
+       $query = $this->db->query('
+        SELECT p.post_id, p.post_description, DATE_FORMAT(p.post_date,"%M %e, %Y %H %p") AS date, CONCAT(u.first_name," ",u.last_name) AS name, u.profile_picture, c.category_name category_name, p.likes, p.views, f.*, 
+            CASE
+                WHEN f.file_size >= 1048576 THEN CONCAT(f.file_size / 1048576, " MB")
+                WHEN f.file_size >= 1024 THEN CONCAT(f.file_size / 1024, " KB")
+                ELSE CONCAT(f.file_size, " bytes")
+            END AS converted_size
+        FROM posts p
+        JOIN users u ON p.user_id = u.user_id
+        JOIN categories c ON p.category_id = c.category_id
+        JOIN files f ON p.file_id = f.file_id
+        WHERE 
+            p.user_id = ' . $this->db->escape($user_id) . '
+        ;
+        ');
+       
+       return $query->result();
+    }
+
+
+
      public function incrementViewsCount() {
         $this->db->query('
             UPDATE posts SET views = views + 1 WHERE post_id > 0;   
@@ -84,7 +123,8 @@ class User_model extends CI_Model {
             $query = $this->db->query("
                 SELECT 
                     SUM(views) AS total_views, 
-                    SUM(likes) AS total_likes
+                    SUM(likes) AS total_likes,
+                    COUNT(*) AS total_documents
                 FROM 
                     posts
                 WHERE 
@@ -93,5 +133,7 @@ class User_model extends CI_Model {
 
             return $query->result();
     }
+
+
 
 }
