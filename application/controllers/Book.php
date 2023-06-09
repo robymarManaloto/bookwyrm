@@ -17,6 +17,10 @@ class Book extends CI_Controller {
 			redirect('/');
 		}
 
+        $username = $this->session->userdata('user_id');
+        $this->load->model('User_model');
+        $user_id = $this->User_model->get_user_by_username($username)->user_id;
+
 		$this->load->view('layout/header');
         $this->load->model('User_model');
 
@@ -25,6 +29,8 @@ class Book extends CI_Controller {
         $data['current_function'] = __FUNCTION__;
         $data['categories'] = $this->User_model->get_categories();
         $data['avail_books'] = $this->User_model->get_avail_books();
+        $data['books_owned'] = $this->User_model->get_books_owned();
+        $data['books_len'] = $this->User_model->get_books_len($user_id);
 
         $this->load->view('manage-books', $data);
         $this->load->view('layout/footer');
@@ -69,23 +75,35 @@ class Book extends CI_Controller {
     }
 
     public function addOwned() {
-        
         $this->load->model('User_model');
         $username = $this->session->userdata('user_id');
         $user_id = $this->User_model->get_user_by_username($username)->user_id;
 
         $this->load->model('User_book');
         $this->User_book->create_borrowers(array('user_id' => $user_id));
+        $next_borrower_id = $this->User_book->get_last_borrowers_id()->borrower_id;
 
         $book_id = $this->input->post('book_id');
         $data = array(
-            'borrower_id' => $next_lender_id,
+            'borrower_id' => $next_borrower_id,
             'book_id' => $book_id,
             'due_date' => date('Y-m-d H:i:s', strtotime('+1 week'))
         );
         $user_id =  $this->User_book->create_booktransactions($data);
 
          // Redirect to a success page or any other page
+        redirect('/book', 'refresh');
+    }
+
+    public function removeOwned() {
+        $this->load->model('User_model');
+        $username = $this->session->userdata('user_id');
+        $user_id = $this->User_model->get_user_by_username($username)->user_id;
+
+        $book_id = $this->input->post('book_id');
+        $this->load->model('User_book');
+        $this->User_book->removeOwnBook($book_id, $user_id);
+
         redirect('/book', 'refresh');
     }
 

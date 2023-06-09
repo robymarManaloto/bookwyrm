@@ -18,6 +18,11 @@ class User_book extends CI_Model {
         return $query->row();
     }
 
+    public function get_last_borrowers_id() {
+        $query = $this->db->select('borrower_id')->order_by('borrower_id', 'desc')->limit(1)->get('borrowers');
+        return $query->row();
+    }
+
     public function upload_file($data) {
         $this->db->insert('files', $data);
     }

@@ -137,17 +137,23 @@
 									            </tr>
 									          </thead>
 									          <tbody>
-											    <tr>
-											      <td>Pride and Prejudice</td>
-											      <td>Jane Austen</td>
-											      <td>A classic love story set in 19th-century England.</td>
-											      <td>1813-01-28</td>
-											      <td>978-0141439518</td>
-											      <td>Jane Smith</td>
-											      <td>
-											        <button class="btn btn-sm btn-danger">Remove</button>
-											      </td>
-											    </tr>
+											    <?php foreach ($books_owned as $book): ?>
+									          		<tr>
+									          		  <th><?php echo $book->title; ?></th>
+										              <th><?php echo $book->author; ?></th>
+										              <th><?php echo $book->description; ?></th>
+										              <th><?php echo $book->publication_date; ?></th>
+										              <th><?php echo $book->isbn; ?></th>
+										              <th><?php echo $book->lender_name; ?></th>
+										              <th> 
+										              <?php echo form_open('book/removeOwned'); ?>
+										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+										              	<button type="submit" class="btn btn-sm btn-danger">Remove</button>
+														<?php echo form_close(); ?>
+										              </th>
+									          		</tr>
+									          	<?php endforeach; ?>
+
 									          </tbody>
 									        </table>
 									      </div>
@@ -176,17 +182,26 @@
 									            </tr>
 									          </thead>
 									          <tbody>
-									           <tr>
-											      <td>The Catcher in the Rye</td>
-											      <td>J.D. Salinger</td>
-											      <td>A coming-of-age story following Holden Caulfield.</td>
-											      <td>1951-07-16</td>
-											      <td>978-0316769174</td>
-											      <td>
-											        <button class="btn btn-sm btn-primary">Unpublish</button>
-											        <button class="btn btn-sm btn-danger">Remove</button>
-											      </td>
-											    </tr>
+									            <?php foreach ($books_len as $book): ?>
+									          		<tr>
+									          		  <th><?php echo $book->title; ?></th>
+										              <th><?php echo $book->author; ?></th>
+										              <th><?php echo $book->description; ?></th>
+										              <th><?php echo $book->publication_date; ?></th>
+										              <th><?php echo $book->isbn; ?></th>
+										              <th> 
+										              <?php echo form_open('book/editLend'); ?>
+										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+										              	<button type="submit" class="btn btn-sm btn-primary">Edit</button>
+													  <?php echo form_close(); ?>
+													  
+										              <?php echo form_open('book/removeLend'); ?>
+										              <input type="hidden" name="book_id" value="<?php echo $book->book_id; ?>">
+										              	<button type="submit" class="btn btn-sm btn-danger">Remove</button>
+														<?php echo form_close(); ?>
+										              </th>
+									          		</tr>
+									          	<?php endforeach; ?>
 									          </tbody>
 									        </table>
 									      </div>

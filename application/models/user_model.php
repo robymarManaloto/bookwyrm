@@ -34,6 +34,35 @@ class User_model extends CI_Model {
        return $query->result();
     }
 
+    public function get_books_owned()
+    {
+        $query = $this->db->query('
+                SELECT 
+                    b.*,
+                    CONCAT(u.first_name," ",u.last_name) AS lender_name
+                FROM books b
+                JOIN booktransactions bt ON b.book_id = bt.book_id
+                JOIN borrowers br ON br.borrower_id = bt.borrower_id
+                JOIN users u ON br.user_id = u.user_id
+        ');
+       return $query->result();
+    }
+
+    public function get_books_len($user_id)
+    {
+        $query = $this->db->query('
+                SELECT 
+                    b.*,
+                    CONCAT(u.first_name," ",u.last_name) AS lender_name
+                FROM books b
+                JOIN booktransactions bt ON b.book_id = bt.book_id
+                JOIN lenders l ON l.lender_id = bt.lender_id
+                JOIN users u ON l.user_id = u.user_id
+                WHERE l.user_id = ' . $this->db->escape($user_id) . '
+        ');
+       return $query->result();
+    }
+
     public function get_posts()
     {
        $this->incrementViewsCount();
