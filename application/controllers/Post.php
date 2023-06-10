@@ -29,8 +29,7 @@ class Post extends CI_Controller {
                 'user_id' => $user_id,
                 'file_id' => $next_id,
                 'category_id' => $this->input->post('categories'),
-                'post_description' => $this->input->post('post_description'),
-                'monetized' => 0
+                'post_description' => $this->input->post('post_description')
                 ));
                         
             // Redirect to a success page or any other page

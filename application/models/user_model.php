@@ -225,7 +225,7 @@ class User_model extends CI_Model {
        $query = $this->db->query("
         SELECT
             c.*,
-            CONCAT(u.first_name,'',u.last_name) AS name,
+            CONCAT(u.first_name,' ',u.last_name) AS name,
             u.profile_picture,
             CASE
                 WHEN TIMESTAMPDIFF(YEAR, c.timestamp, NOW()) > 0 THEN CONCAT(TIMESTAMPDIFF(YEAR,  c.timestamp, NOW()), ' year', IF(TIMESTAMPDIFF(YEAR,  c.timestamp, NOW()) > 1, 's', ''), ' ago')

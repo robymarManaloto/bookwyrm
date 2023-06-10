@@ -46,8 +46,7 @@ class Auth extends CI_Controller {
                     'cover.jpg'),                
                 'phone_number' => $this->input->post('phone_number'),
                 'city' => $this->input->post('city'),
-                'country' => $this->input->post('country'),
-                'credits' => 0
+                'country' => $this->input->post('country')
             );
             $this->User_model->create_user($data);
             $this->session->set_userdata('user_id', $this->input->post('username'));
@@ -134,8 +133,6 @@ class Auth extends CI_Controller {
             }
         }
     }
-
-
 
     public function logout()
     {
